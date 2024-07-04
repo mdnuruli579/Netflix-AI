@@ -1,23 +1,25 @@
 import React from 'react'
 import MovieList from './MovieList'
 import { useSelector } from 'react-redux'
+import lang from '../utils/languageConstant';
 
 const SecondryContainer = () => {
   const movies=useSelector((store)=>store.movies);
+  const langKey=useSelector((store)=>store.config.lang);
   return (
     movies.nowPlayingMovies &&
     (
-      <div className="bg-black mr-0px">
-        <div className=" mt-0 md:-mt-51 pl-4 md:pl-12 relative z-20">
-          <MovieList title={"Now Playing"} movies={movies.nowPlayingMovies} />
-          <MovieList title={"Trending"} movies={movies.trandingMovies} />
-          <MovieList title={"Popular"} movies={movies.popularMovies} />
+      <div className="bg-black">
+        <div className=" mt-0 md:-mt-50 pl-4 md:pl-12 relative z-20">
+          <MovieList title={lang[langKey].NOW_PLAYING} movies={movies.nowPlayingMovies} />
+          <MovieList title={lang[langKey].TRANDING} movies={movies.trandingMovies} />
+          <MovieList title={lang[langKey].POPULAR} movies={movies.popularMovies} />
           <MovieList
-            title={"Upcoming Movies"}
+            title={lang[langKey].UPCOM_MOVI}
             movies={movies.upcomingMovies}
           />
-          <MovieList title={"Horror"} movies={movies.horrorMovies} />
-          <MovieList title={"Comedy"} movies={movies.comedyMovies} />
+          <MovieList title={lang[langKey].HORROR}movies={movies.horrorMovies} />
+          <MovieList title={lang[langKey].COMEDY} movies={movies.comedyMovies} />
         </div>
       </div>
     )

@@ -56,7 +56,8 @@ const Header = () => {
   },[])
   
   return (
-    <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
+    <div className="absolute w-screen px-8 py-2 bg-gradient-to-b 
+    from-black z-10 flex flex-col md:flex-row justify-between">
     <img className="w-44 mx-auto md:mx-0" src={LOGO} alt="logo" />
     {user && (
       <div className="flex p-2 justify-between">
@@ -79,7 +80,7 @@ const Header = () => {
           </div>
         )}
           <select
-            className="p-2 m-2 bg-gray-900 text-white rounded-lg"
+             className="p-2 m-2 bg-gray-900 text-white"
              onChange={handleLanguageChange}
           >
             {SUPPORTED_LANGUAGES.map((lang) => (
@@ -92,10 +93,10 @@ const Header = () => {
           className="py-2 px-4 mx-4 my-2 bg-purple-800 text-white rounded-lg"
           onClick={handleGptSearchClick}
         >
-          {showGptSearch ? "Homepage" : "GPT Search"}
+          {showGptSearch ? lang[langKey].HOMEPAGE  : lang[langKey].GPT_SEARCH}
         </button>
-        <button onClick={handleSignOut} className="font-bold text-white ">
-          (Sign Out)
+        <button onClick={handleSignOut}>
+          <img className='w-10 h-10' src={require('../image/Sign Out.png')}/>
         </button>
       </div>
     )}
