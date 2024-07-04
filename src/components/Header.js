@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useNavigate } from "react-router-dom";
 import { auth } from "../utils/firebase";
 import {  onAuthStateChanged, signOut } from "firebase/auth";
@@ -8,10 +8,13 @@ import {LOGO, SUPPORTED_LANGUAGES} from '../utils/constant'
 import { toggleGptSearchView } from '../utils/gptSlice';
 import { changeLanguage } from '../utils/configSlice';
 import lang from '../utils/languageConstant';
+import { searchMovieTMDB } from '../utils/movie';
+import { addMoviesByName } from '../utils/moviesSlice';
 
 const Header = () => {
   const dispatch=useDispatch();
   const navigate = useNavigate();
+  const movieName=useRef(null);
   const langKey=useSelector((store)=>store.config.lang);
   const user = useSelector((store) => store.user);
   const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
@@ -28,6 +31,15 @@ const Header = () => {
   }
   const handleLanguageChange=(e)=>{
     dispatch(changeLanguage(e.target.value));
+  }
+  const searchMovieByName=async ()=>{
+    const promiseArray=searchMovieTMDB(movieName.current.value);
+    const movie = await Promise.resolve(promiseArray);
+    dispatch(addMoviesByName(movie))
+  }
+  const resetMovie=()=>{
+    movieName.current.value='';
+    dispatch(addMoviesByName(null));
   }
   useEffect(()=>{
    const unsubscribe= onAuthStateChanged(auth, (user) => {
@@ -50,10 +62,17 @@ const Header = () => {
       <div className="flex p-2 justify-between">
         {!showGptSearch &&(
           <div>
-            <input type='text' placeholder={lang[langKey].SEARCH_MOVIE_BY_NAME}
-             className='h-10 rounded-lg'/>
             <button
             className="py-2 px-4 mx-4 my-2 bg-purple-700 text-white rounded-lg"
+            onClick={resetMovie}
+          >
+            {lang[langKey].RESET}
+          </button>
+            <input ref={movieName} type='text' placeholder={lang[langKey].SEARCH_MOVIE_BY_NAME}
+             className='p-4 h-10 rounded-lg font-bold'/>
+            <button
+            className="py-2 px-4 mx-4 my-2 bg-purple-700 text-white rounded-lg"
+            onClick={searchMovieByName}
           >
             {lang[langKey].SEARCH_MOVIE}
           </button>

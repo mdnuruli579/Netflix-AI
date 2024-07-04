@@ -4,24 +4,13 @@ import lang from '../utils/languageConstant';
 import openAI from '../utils/openAI';
 import addGptMovieResult from '../utils/gptSlice'
 import { API_OPTIONS } from '../utils/constant';
+import { searchMovieTMDB } from '../utils/movie';
 
 const GptSearchBar = () => {
 
     const langKey=useSelector((store)=>store.config.lang);
     const searchText=useRef(null);
     const dispatch=useDispatch();
-    const searchMovieTMDB = async (movie) => {
-      const data = await fetch(
-        "https://api.themoviedb.org/3/search/movie?query=" +
-          movie +
-          "&include_adult=false&language=en-US&page=1",
-        API_OPTIONS
-      );
-      const json = await data.json();
-  
-      return json.results;
-    };
-
     const handleGptSearchClick= async()=>{
       const gptQuery =
       "Act as a Movie Recommendation system and suggest some movies for the query : " +
@@ -79,5 +68,4 @@ const GptSearchBar = () => {
   </div>
   )
 }
-
 export default GptSearchBar
