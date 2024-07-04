@@ -18,6 +18,7 @@ const useUpcomingMovie=()=>{
   }
   useEffect(()=>{
     !upcomingMovies && getUpcomingMovie();
+    // getUpcomingMovie();
   },[]);
 }
 export default useUpcomingMovie;

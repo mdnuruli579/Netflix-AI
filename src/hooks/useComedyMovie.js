@@ -18,6 +18,7 @@ const useComedyMovie=()=>{
   }
   useEffect(()=>{
     !comedyMovies && getComedyMovie();
+    // getComedyMovie();
   },[]);
 }
 export default useComedyMovie;

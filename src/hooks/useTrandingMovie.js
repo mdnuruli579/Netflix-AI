@@ -18,6 +18,7 @@ const useTrandingMovie=()=>{
   }
   useEffect(()=>{
     !trandingMovies && getTrandingMovie();
+    // getTrandingMovie();
   },[]);
 }
 export default useTrandingMovie;

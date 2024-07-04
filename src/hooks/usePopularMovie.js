@@ -18,6 +18,7 @@ const usePopularMovie=()=>{
   }
   useEffect(()=>{
     !popularMovies && getPopularMovie();
+    // getPopularMovie();
   },[]);
 }
 export default usePopularMovie;

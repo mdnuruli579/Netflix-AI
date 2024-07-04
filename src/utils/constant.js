@@ -8,7 +8,7 @@ export const LOGO =
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: ''+process.env.REACT_APP_OPENAI_KEY,
+      Authorization: ''+process.env.REACT_APP_TMDB_KEY,
     }
   };
   // +process.env.REACT_APP_TMDB_KEY

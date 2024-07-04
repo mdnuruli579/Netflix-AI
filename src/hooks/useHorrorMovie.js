@@ -18,6 +18,7 @@ const useHorrorMovie=()=>{
   }
   useEffect(()=>{
     !horrorMovies && getHorrorMovie();
+    // getHorrorMovie();
   },[]);
 }
 export default useHorrorMovie;
